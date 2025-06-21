@@ -1,4 +1,4 @@
-package entity;
+package com.javarush.domain;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Table(name = "country_language", schema = "world")
 public class CountryLanguage {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "country_id", referencedColumnName = "id")

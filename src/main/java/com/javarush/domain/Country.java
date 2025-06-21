@@ -1,4 +1,4 @@
-package entity;
+package com.javarush.domain;
 
 import jakarta.persistence.*;
 
@@ -9,7 +9,7 @@ import java.util.Set;
 @Table(name = "country", schema = "world")
 public class Country {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "code")
     private String code;
@@ -23,7 +23,7 @@ public class Country {
     @Column(name = "region")
     private String region;
     @Column(name = "surface_area")
-    private Double surfaceArea;
+    private BigDecimal surfaceArea;
     @Column(name = "indep_year")
     private Short indepYear;
     @Column(name = "population")
@@ -40,14 +40,14 @@ public class Country {
     private String governmentForm;
     @Column(name = "head_of_state")
     private String headOfState;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "capital", referencedColumnName = "id")
     private City capital;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
     private Set<CountryLanguage> languages;
 
-    public Country(Integer id, String code, String code_2, String name, Continent continent, String region, Double surfaceArea, Short indepYear, Integer population, BigDecimal lifeExpectancy, BigDecimal gnp, BigDecimal gnpoId, String localName, String governmentForm, String headOfState, City capital, Set<CountryLanguage> languages) {
+    public Country(Integer id, String code, String code_2, String name, Continent continent, String region, BigDecimal surfaceArea, Short indepYear, Integer population, BigDecimal lifeExpectancy, BigDecimal gnp, BigDecimal gnpoId, String localName, String governmentForm, String headOfState, City capital, Set<CountryLanguage> languages) {
         this.id = id;
         this.code = code;
         this.code_2 = code_2;
@@ -118,11 +118,11 @@ public class Country {
         this.region = region;
     }
 
-    public Double getSurfaceArea() {
+    public BigDecimal getSurfaceArea() {
         return surfaceArea;
     }
 
-    public void setSurfaceArea(Double surfaceArea) {
+    public void setSurfaceArea(BigDecimal surfaceArea) {
         this.surfaceArea = surfaceArea;
     }
 
